@@ -35,9 +35,20 @@ const Coin = styled.li`
   background-color: ${(props) => props.theme.accentColor};
   color: ${(props) => props.theme.bgColor};
   margin-bottom: 10px;
-  padding: 20px;
   font-size: ${(props) => props.theme.fontSize};
   width: 350px;
+  border-radius: 15px;
+  transition: all 0.2s ease-in;
+  a {
+    padding: 20px;
+    display: block;
+  }
+  &:hover {
+    cursor: pointer;
+    border: 1px solid ${(props) => props.theme.accentColor};
+    background-color: ${(props) => props.theme.bgColor};
+    color: ${(props) => props.theme.textColor};
+  }
 `;
 
 const coins = [
