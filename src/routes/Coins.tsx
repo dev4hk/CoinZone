@@ -1,3 +1,4 @@
+import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 
@@ -51,26 +52,16 @@ const Coin = styled.li`
   }
 `;
 
-const coins = [
-  {
-    id: "btc-bitcoin",
-    name: "Bitcoin",
-    symbol: "BTC",
-    rank: 1,
-    is_new: false,
-    is_active: true,
-    type: "coin",
-  },
-  {
-    id: "eth-ethereum",
-    name: "Ethereum",
-    symbol: "ETH",
-    rank: 2,
-    is_new: false,
-    is_active: true,
-    type: "coin",
-  },
-];
+const Img = styled.img`
+  width: 25px;
+  height: 25px;
+  margin-right: 25px;
+`;
+
+const CoinWrapper = styled.div`
+  display: flex;
+  align-items: center;
+`;
 
 interface ICoin {
   id: string;
@@ -83,18 +74,41 @@ interface ICoin {
 }
 
 function Coins() {
+  const [coins, setCoins] = useState<ICoin[]>([]);
+  const [loading, setLoading] = useState(true);
+  useEffect(() => {
+    (async () => {
+      const res = await fetch("https://api.coinpaprika.com/v1/coins");
+      const json = await res.json();
+      setCoins(json.slice(0, 100));
+      setLoading(false);
+    })();
+  }, []);
+
   return (
     <Container>
       <Title>Explore Coins!</Title>
       <Subtitle>Click Coin(s) You Are Interested To See More Info</Subtitle>
       <ContentsBox>
-        <CoinsList>
-          {coins.map((coin) => (
-            <Coin key={coin.id}>
-              <Link to={`/${coin.id}`}>{coin.name}</Link>
-            </Coin>
-          ))}
-        </CoinsList>
+        {loading ? (
+          "loading..."
+        ) : (
+          <CoinsList>
+            {coins.map((coin) => (
+              <Coin key={coin.id}>
+                <Link to={`/${coin.id}`}>
+                  <CoinWrapper>
+                    <Img
+                      src={`https://static.coinpaprika.com/coin/${coin.id}/logo.png`}
+                      alt=""
+                    />
+                    {coin.name}
+                  </CoinWrapper>
+                </Link>
+              </Coin>
+            ))}
+          </CoinsList>
+        )}
         <Rankings>Rankings box</Rankings>
       </ContentsBox>
     </Container>
