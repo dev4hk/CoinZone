@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import styled from "styled-components";
 
 const Container = styled.div`
@@ -36,6 +37,7 @@ const Coin = styled.li`
   margin-bottom: 10px;
   padding: 20px;
   font-size: ${(props) => props.theme.fontSize};
+  width: 350px;
 `;
 
 const coins = [
@@ -67,7 +69,9 @@ function Coins() {
       <ContentsBox>
         <CoinsList>
           {coins.map((coin) => (
-            <Coin key={coin.id}>{coin.name}</Coin>
+            <Coin key={coin.id}>
+              <Link to={`/${coin.id}`}>{coin.name}</Link>
+            </Coin>
           ))}
         </CoinsList>
         <Rankings>Rankings box</Rankings>
