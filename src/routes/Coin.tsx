@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { Link, Route, Switch, useParams } from "react-router-dom";
 import styled from "styled-components";
+import Price from "./Price";
+import Chart from "./Chart";
 
 const Container = styled.div`
   display: flex;
@@ -51,6 +53,25 @@ const ContentsBox = styled.div`
   width: 40vw;
   background-color: ${(props) => props.theme.contentBgColor};
   border-radius: 20px;
+`;
+
+const Tabs = styled.div`
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  margin: 2px 0px;
+  gap: 10px;
+`;
+
+const Tab = styled.span`
+  text-align: center;
+  cursor: pointer;
+  font-size: ${(props) => props.theme.subtitleFontSize};
+  background-color: rgba(0, 0, 0, 0.5);
+  border-radius: 10px;
+  a {
+    padding: 7px 0px;
+    display: block;
+  }
 `;
 
 interface Params {
@@ -130,8 +151,6 @@ function Coin() {
       setInfo(jsonInfo);
       setPrice(jsonPrice);
       setLoading(false);
-      console.log(info);
-      console.log(price);
     })();
   }, []);
 
@@ -177,7 +196,24 @@ function Coin() {
               </OverviewItem>
             </Overview>
           </ContentsBox>
-          <ContentsBox>box2</ContentsBox>
+          <ContentsBox>
+            <Tabs>
+              <Tab>
+                <Link to={`/${coinId}/price`}>Price</Link>
+              </Tab>
+              <Tab>
+                <Link to={`/${coinId}/chart`}>Chart</Link>
+              </Tab>
+            </Tabs>
+            <Switch>
+              <Route path={`/:coinId/price`}>
+                <Price />
+              </Route>
+              <Route path={`/:coinId/chart`}>
+                <Chart />
+              </Route>
+            </Switch>
+          </ContentsBox>
         </>
       )}
     </Container>
