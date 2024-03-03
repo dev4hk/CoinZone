@@ -13,9 +13,10 @@ const Container = styled.div`
 const Overview = styled.div`
   background-color: ${(props) => props.theme.bgColor};
   display: flex;
-  justify-content: space-around;
+  justify-content: space-between;
   border-radius: 10px;
   margin: 20px 0px;
+  padding: 10px;
 `;
 
 const OverviewItem = styled.div`
@@ -136,45 +137,49 @@ function Coin() {
 
   return (
     <Container>
-      <ContentsBox>
-        <Subtitle>
-          {info?.name ? info.name : loading ? "Loading..." : ""}
-        </Subtitle>
-        <Overview>
-          <OverviewItem>
-            <OverviewItemDetail>Rank:</OverviewItemDetail>
-            <OverviewItemDetail>{info?.rank}</OverviewItemDetail>
-          </OverviewItem>
-          <OverviewItem>
-            <OverviewItemDetail>Symbol:</OverviewItemDetail>
-            <OverviewItemDetail>{info?.symbol}</OverviewItemDetail>
-          </OverviewItem>
-          <OverviewItem>
-            <OverviewItemDetail>Started At:</OverviewItemDetail>
-            <OverviewItemDetail>
-              {trimDateTime(info?.started_at || "")}
-            </OverviewItemDetail>
-          </OverviewItem>
-          <OverviewItem>
-            <OverviewItemDetail>Is Active?</OverviewItemDetail>
-            <OverviewItemDetail>
-              {info?.is_active ? "Yes" : "No"}
-            </OverviewItemDetail>
-          </OverviewItem>
-        </Overview>
-        <Description>{info?.description}</Description>
-        <Overview>
-          <OverviewItem>
-            <OverviewItemDetail>Total Supply:</OverviewItemDetail>
-            <OverviewItemDetail>{price?.total_supply}</OverviewItemDetail>
-          </OverviewItem>
-          <OverviewItem>
-            <OverviewItemDetail>Max Supply:</OverviewItemDetail>
-            <OverviewItemDetail>{price?.max_supply}</OverviewItemDetail>
-          </OverviewItem>
-        </Overview>
-      </ContentsBox>
-      <ContentsBox>box2</ContentsBox>
+      {loading ? (
+        <h2>Loading...</h2>
+      ) : (
+        <>
+          <ContentsBox>
+            <Subtitle>{info?.name}</Subtitle>
+            <Overview>
+              <OverviewItem>
+                <OverviewItemDetail>Rank:</OverviewItemDetail>
+                <OverviewItemDetail>{info?.rank}</OverviewItemDetail>
+              </OverviewItem>
+              <OverviewItem>
+                <OverviewItemDetail>Symbol:</OverviewItemDetail>
+                <OverviewItemDetail>{info?.symbol}</OverviewItemDetail>
+              </OverviewItem>
+              <OverviewItem>
+                <OverviewItemDetail>Started At:</OverviewItemDetail>
+                <OverviewItemDetail>
+                  {trimDateTime(info?.started_at || "")}
+                </OverviewItemDetail>
+              </OverviewItem>
+              <OverviewItem>
+                <OverviewItemDetail>Is Active?</OverviewItemDetail>
+                <OverviewItemDetail>
+                  {info?.is_active ? "Yes" : "No"}
+                </OverviewItemDetail>
+              </OverviewItem>
+            </Overview>
+            <Description>{info?.description}</Description>
+            <Overview>
+              <OverviewItem>
+                <OverviewItemDetail>Total Supply:</OverviewItemDetail>
+                <OverviewItemDetail>{price?.total_supply}</OverviewItemDetail>
+              </OverviewItem>
+              <OverviewItem>
+                <OverviewItemDetail>Max Supply:</OverviewItemDetail>
+                <OverviewItemDetail>{price?.max_supply}</OverviewItemDetail>
+              </OverviewItem>
+            </Overview>
+          </ContentsBox>
+          <ContentsBox>box2</ContentsBox>
+        </>
+      )}
     </Container>
   );
 }
