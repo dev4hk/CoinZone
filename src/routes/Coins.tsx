@@ -1,8 +1,9 @@
-import { useEffect, useState } from "react";
 import { useQuery } from "react-query";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
-import { fetchCoins } from "../api";
+import { fetchCoins, fetchTickers } from "../services/api";
+import { ICoin, IInfo, ITicker } from "../interfaces/Interface";
+import { getSortedCoinsByPercentChanges } from "../services/service";
 
 const Container = styled.div`
   display: flex;
@@ -22,9 +23,8 @@ const Subtitle = styled.h3`
 `;
 
 const ContentsBox = styled.div`
-  display: flex;
-  flex-direction: row;
-  justify-content: space-around;
+  display: grid;
+  grid-template-columns: 2fr 1fr;
   padding: 20px;
 `;
 
@@ -33,6 +33,10 @@ const CoinsList = styled.ul``;
 const Rankings = styled.div`
   padding: 20px;
 `;
+
+const Ranking = styled.div``;
+
+const RankContainer = styled.div``;
 
 const Coin = styled.li`
   background-color: ${(props) => props.theme.accentColor};
@@ -65,31 +69,35 @@ const CoinWrapper = styled.div`
   align-items: center;
 `;
 
-interface ICoin {
-  id: string;
-  name: string;
-  symbol: string;
-  rank: number;
-  is_new: boolean;
-  is_active: boolean;
-  type: string;
-}
-
 function Coins() {
-  const { isLoading, data } = useQuery<ICoin[]>("coins", fetchCoins, {
+  const { isLoading: isCoinsLoading, data: coinsData } = useQuery<ICoin[]>(
+    "coins",
+    fetchCoins,
+    {
+      select: (data) => data.slice(0, 100),
+    }
+  );
+
+  const { isLoading: isTickersLoading, data: tickersData } = useQuery<
+    ITicker[]
+  >("tickers", fetchTickers, {
     select: (data) => data.slice(0, 100),
   });
+
+  const sortedCoins = getSortedCoinsByPercentChanges(tickersData);
+  const top10Gainers = sortedCoins?.slice(90, 100);
+  const top10Losers = sortedCoins?.slice(0, 10);
 
   return (
     <Container>
       <Title>Explore Coins!</Title>
       <Subtitle>Click Coin(s) You Are Interested To See More Info</Subtitle>
-      <ContentsBox>
-        {isLoading ? (
-          "loading..."
-        ) : (
+      {isCoinsLoading ? (
+        "loading..."
+      ) : (
+        <ContentsBox>
           <CoinsList>
-            {data?.map((coin) => (
+            {coinsData?.map((coin) => (
               <Coin key={coin.id}>
                 <Link to={`/${coin.id}`}>
                   <CoinWrapper>
@@ -103,9 +111,17 @@ function Coins() {
               </Coin>
             ))}
           </CoinsList>
-        )}
-        <Rankings>Rankings box</Rankings>
-      </ContentsBox>
+          <Rankings>
+            <Ranking>
+              <Subtitle>Top 10 Gainers</Subtitle>
+              <RankContainer></RankContainer>
+            </Ranking>
+            <Ranking>
+              <Subtitle>Top 10 Losers</Subtitle>
+            </Ranking>
+          </Rankings>
+        </ContentsBox>
+      )}
     </Container>
   );
 }
