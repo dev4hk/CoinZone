@@ -1,8 +1,9 @@
-import { useEffect, useState } from "react";
 import { Link, Route, Switch, useParams } from "react-router-dom";
 import styled from "styled-components";
 import Price from "./Price";
 import Chart from "./Chart";
+import { useQuery } from "react-query";
+import { fetchCoinInfo, fetchCoinTicker } from "../api";
 
 const Container = styled.div`
   display: flex;
@@ -99,7 +100,7 @@ interface IInfo {
   last_data_at: string;
 }
 
-interface IPrice {
+interface ITicker {
   id: string;
   name: string;
   symbol: string;
@@ -134,65 +135,59 @@ interface IPrice {
 }
 
 function Coin() {
-  const [info, setInfo] = useState<IInfo>();
-  const [price, setPrice] = useState<IPrice>();
-  const [loading, setLoading] = useState(true);
   const { coinId } = useParams<Params>();
-  useEffect(() => {
-    (async () => {
-      const info = await fetch(
-        `https://api.coinpaprika.com/v1/coins/${coinId}`
-      );
-      const price = await fetch(
-        `https://api.coinpaprika.com/v1/tickers/${coinId}`
-      );
-      const jsonInfo = await info.json();
-      const jsonPrice = await price.json();
-      setInfo(jsonInfo);
-      setPrice(jsonPrice);
-      setLoading(false);
-    })();
-  }, []);
+  const { isLoading: isInfoLoading, data: infoData } = useQuery<IInfo>(
+    ["info", coinId],
+    () => fetchCoinInfo(coinId)
+  );
+  const { isLoading: isTickerLoading, data: tickerData } = useQuery<ITicker>(
+    ["ticker", coinId],
+    () => fetchCoinTicker(coinId)
+  );
 
   return (
     <Container>
-      {loading ? (
+      {isInfoLoading || isTickerLoading ? (
         <h2>Loading...</h2>
       ) : (
         <>
           <ContentsBox>
-            <Subtitle>{info?.name}</Subtitle>
+            <Subtitle>{infoData?.name}</Subtitle>
             <Overview>
               <OverviewItem>
                 <OverviewItemDetail>Rank:</OverviewItemDetail>
-                <OverviewItemDetail>{info?.rank}</OverviewItemDetail>
+                <OverviewItemDetail>{infoData?.rank}</OverviewItemDetail>
               </OverviewItem>
               <OverviewItem>
                 <OverviewItemDetail>Symbol:</OverviewItemDetail>
-                <OverviewItemDetail>{info?.symbol}</OverviewItemDetail>
+                <OverviewItemDetail>{infoData?.symbol}</OverviewItemDetail>
               </OverviewItem>
               <OverviewItem>
                 <OverviewItemDetail>Started At:</OverviewItemDetail>
                 <OverviewItemDetail>
-                  {trimDateTime(info?.started_at || "")}
+                  {trimDateTime(infoData?.started_at || "")}
                 </OverviewItemDetail>
               </OverviewItem>
               <OverviewItem>
                 <OverviewItemDetail>Is Active?</OverviewItemDetail>
                 <OverviewItemDetail>
-                  {info?.is_active ? "Yes" : "No"}
+                  {infoData?.is_active ? "Yes" : "No"}
                 </OverviewItemDetail>
               </OverviewItem>
             </Overview>
-            <Description>{info?.description}</Description>
+            <Description>{infoData?.description}</Description>
             <Overview>
               <OverviewItem>
                 <OverviewItemDetail>Total Supply:</OverviewItemDetail>
-                <OverviewItemDetail>{price?.total_supply}</OverviewItemDetail>
+                <OverviewItemDetail>
+                  {tickerData?.total_supply}
+                </OverviewItemDetail>
               </OverviewItem>
               <OverviewItem>
                 <OverviewItemDetail>Max Supply:</OverviewItemDetail>
-                <OverviewItemDetail>{price?.max_supply}</OverviewItemDetail>
+                <OverviewItemDetail>
+                  {tickerData?.max_supply}
+                </OverviewItemDetail>
               </OverviewItem>
             </Overview>
           </ContentsBox>
