@@ -15,3 +15,9 @@ export async function fetchCoinInfo(coinId: string) {
 export async function fetchCoinTicker(coinId: string) {
   return fetch(`${BASE}/tickers/${coinId}`).then((res) => res.json());
 }
+
+export async function fetchCoinHistory(coinId: string) {
+  return fetch(
+    `https://ohlcv-api.nomadcoders.workers.dev?coinId=${coinId}`
+  ).then((res) => res.json());
+}
