@@ -9,14 +9,16 @@ export interface ICoin {
 }
 
 export interface ICoinHistory {
-  time_open: number;
-  time_close: number;
-  open: string;
-  high: string;
-  low: string;
-  close: string;
-  volume: string;
-  market_cap: number;
+  // time_open: number;
+  // time_close: number;
+  // open: string;
+  // high: string;
+  // low: string;
+  // close: string;
+  // volume: string;
+  // market_cap: number;
+  price: number;
+  timestamp: string;
 }
 
 export interface IInfo {

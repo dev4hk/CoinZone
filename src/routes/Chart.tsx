@@ -1,5 +1,5 @@
 import { useQuery } from "react-query";
-import { fetchCoinHistory } from "../services/api";
+import { fetchCoinHistory, fetchCoinTicker } from "../services/api";
 import { ICoinHistory } from "../interfaces/Interface";
 import ReactApexChart from "react-apexcharts";
 
@@ -7,10 +7,15 @@ interface IChartProps {
   coinId: string;
 }
 
+const PERIOD_1D = "1d";
+const PERIOD_1M = "1m";
+const PERIOD_1Y = "1y";
+
 function Chart({ coinId }: IChartProps) {
   const { isLoading, data } = useQuery<ICoinHistory[]>(["ohlcv", coinId], () =>
-    fetchCoinHistory(coinId)
+    fetchCoinHistory(coinId, PERIOD_1Y)
   );
+  console.log(data);
   return (
     <div>
       {isLoading ? (
@@ -43,9 +48,7 @@ function Chart({ coinId }: IChartProps) {
               labels: { show: false },
               axisTicks: { show: false },
               axisBorder: { show: false },
-              categories: data?.map(
-                (price) => new Date(price.time_close * 1000)
-              ),
+              categories: data?.map((item) => item.timestamp),
             },
             fill: {
               type: "gradient",
@@ -56,7 +59,7 @@ function Chart({ coinId }: IChartProps) {
           series={[
             {
               name: "price",
-              data: data?.map((price) => Number(price.close)) ?? [],
+              data: data?.map((price) => price.price),
             },
           ]}
         />
