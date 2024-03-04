@@ -36,7 +36,17 @@ const Rankings = styled.div`
 
 const Ranking = styled.div``;
 
-const RankContainer = styled.div``;
+const RankContainer = styled.div`
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 5px;
+  font-size: ${(props) => props.theme.fontSize};
+  cursor: pointer;
+  transition: all 0.2s ease-in;
+  &:hover {
+    color: ${(props) => props.theme.hoverColor};
+  }
+`;
 
 const Coin = styled.li`
   background-color: ${(props) => props.theme.accentColor};
@@ -54,7 +64,7 @@ const Coin = styled.li`
     cursor: pointer;
     border: 1px solid ${(props) => props.theme.accentColor};
     background-color: ${(props) => props.theme.bgColor};
-    color: ${(props) => props.theme.textColor};
+    color: ${(props) => props.theme.hoverColor};
   }
 `;
 
@@ -67,6 +77,14 @@ const Img = styled.img`
 const CoinWrapper = styled.div`
   display: flex;
   align-items: center;
+  margin-right: 30px;
+`;
+
+const ChangeNumber = styled.span<{ isGain?: boolean }>`
+  display: flex;
+  align-items: center;
+  color: ${(props) =>
+    props.isGain ? props.theme.gainColor : props.theme.loseColor};
 `;
 
 function Coins() {
@@ -85,7 +103,7 @@ function Coins() {
   });
 
   const sortedCoins = getSortedCoinsByPercentChanges(tickersData);
-  const top10Gainers = sortedCoins?.slice(90, 100);
+  const top10Gainers = sortedCoins?.slice(90, 100).reverse();
   const top10Losers = sortedCoins?.slice(0, 10);
 
   return (
@@ -114,10 +132,45 @@ function Coins() {
           <Rankings>
             <Ranking>
               <Subtitle>Top 10 Gainers</Subtitle>
-              <RankContainer></RankContainer>
+              {top10Gainers?.map((coin) => (
+                <Link to={`/${coin.id}`}>
+                  <RankContainer key={coin.id}>
+                    <CoinWrapper>
+                      <Img
+                        src={`https://static.coinpaprika.com/coin/${coin.id}/logo.png`}
+                        alt=""
+                      />
+                      {coin.name}
+                    </CoinWrapper>
+                    <ChangeNumber
+                      isGain={coin.quotes.USD.percent_change_24h >= 0}
+                    >
+                      {coin.quotes.USD.percent_change_24h}%
+                    </ChangeNumber>
+                  </RankContainer>
+                </Link>
+              ))}
             </Ranking>
             <Ranking>
               <Subtitle>Top 10 Losers</Subtitle>
+              {top10Losers?.map((coin) => (
+                <Link to={`/${coin.id}`}>
+                  <RankContainer key={coin.id}>
+                    <CoinWrapper>
+                      <Img
+                        src={`https://static.coinpaprika.com/coin/${coin.id}/logo.png`}
+                        alt=""
+                      />
+                      {coin.name}
+                    </CoinWrapper>
+                    <ChangeNumber
+                      isGain={coin.quotes.USD.percent_change_24h >= 0}
+                    >
+                      {coin.quotes.USD.percent_change_24h}%
+                    </ChangeNumber>
+                  </RankContainer>
+                </Link>
+              ))}
             </Ranking>
           </Rankings>
         </ContentsBox>

@@ -9,5 +9,8 @@ declare module "styled-components" {
     titleFontSize: string;
     subtitleFontSize: string;
     fontSize: string;
+    gainColor: string;
+    loseColor: string;
+    hoverColor: string;
   }
 }

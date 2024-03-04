@@ -8,4 +8,7 @@ export const theme: DefaultTheme = {
   titleFontSize: "48px",
   subtitleFontSize: "24px",
   fontSize: "18px",
+  gainColor: "#4cd137",
+  loseColor: "#e84118",
+  hoverColor: "#9c88ff",
 };
