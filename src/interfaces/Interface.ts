@@ -8,6 +8,17 @@ export interface ICoin {
   type: string;
 }
 
+export interface ICoinHistory {
+  time_open: number;
+  time_close: number;
+  open: string;
+  high: string;
+  low: string;
+  close: string;
+  volume: string;
+  market_cap: number;
+}
+
 export interface IInfo {
   id: string;
   name: string;
