@@ -11,11 +11,12 @@ function Chart({ coinId }: IChartProps) {
   const { isLoading, data } = useQuery<ICoinHistory[]>(["ohlcv", coinId], () =>
     fetchCoinHistory(coinId)
   );
-  console.log(data);
   return (
     <div>
       {isLoading ? (
         "Loading..."
+      ) : !Array.isArray(data) ? (
+        "Data Not Available"
       ) : (
         <ReactApexChart
           type="line"
@@ -29,12 +30,28 @@ function Chart({ coinId }: IChartProps) {
             },
             stroke: { curve: "smooth", width: 3 },
             grid: { show: false },
+            tooltip: {
+              y: {
+                formatter: (value) => `$${value}`,
+              },
+              x: {
+                show: false,
+              },
+            },
             yaxis: { show: false },
             xaxis: {
               labels: { show: false },
               axisTicks: { show: false },
               axisBorder: { show: false },
+              categories: data?.map(
+                (price) => new Date(price.time_close * 1000)
+              ),
             },
+            fill: {
+              type: "gradient",
+              gradient: { gradientToColors: ["blue"], stops: [0, 100] },
+            },
+            colors: ["red"],
           }}
           series={[
             {
