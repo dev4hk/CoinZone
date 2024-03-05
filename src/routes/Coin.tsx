@@ -125,7 +125,9 @@ function Coin() {
                 </OverviewItemDetail>
               </OverviewItem>
             </Overview>
-            <Description>{infoData?.description}</Description>
+            <Description>
+              {infoData?.description || "Description Not Available."}
+            </Description>
             <Overview>
               <OverviewItem>
                 <OverviewItemDetail>Total Supply:</OverviewItemDetail>
