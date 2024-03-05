@@ -11,4 +11,5 @@ export const theme: DefaultTheme = {
   gainColor: "#4cd137",
   loseColor: "#e84118",
   hoverColor: "#9c88ff",
+  inputColor: "#dcdde1",
 };

@@ -12,5 +12,6 @@ declare module "styled-components" {
     gainColor: string;
     loseColor: string;
     hoverColor: string;
+    inputColor: string;
   }
 }

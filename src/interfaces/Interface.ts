@@ -1,6 +1,10 @@
 export interface ICalculator {
   coinPrice: number;
-  name: string;
+  symbol: string;
+}
+
+export interface IChartProps {
+  coinId: string;
 }
 
 export interface ICoin {

@@ -1,10 +1,11 @@
 import { Link, Route, Switch, useParams } from "react-router-dom";
 import styled from "styled-components";
-import Price from "./Price";
-import Chart from "./Chart";
+import Price from "../components/Price";
 import { useQuery } from "react-query";
 import { fetchCoinInfo, fetchCoinTicker } from "../services/api";
 import { IInfo, ITicker, Params } from "../interfaces/Interface";
+import Calculator from "../components/Calculator";
+import Chart from "../components/Chart";
 
 const Container = styled.div`
   display: flex;
@@ -57,6 +58,11 @@ const ContentsBox = styled.div`
   border-radius: 20px;
 `;
 
+const Wrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+`;
+
 const Tabs = styled.div`
   display: grid;
   grid-template-columns: repeat(2, 1fr);
@@ -87,9 +93,11 @@ function Coin() {
     () => fetchCoinTicker(coinId)
   );
 
+  const isLoading = isInfoLoading || isTickerLoading;
+
   return (
     <Container>
-      {isInfoLoading || isTickerLoading ? (
+      {isLoading ? (
         <h2>Loading...</h2>
       ) : (
         <>
@@ -133,24 +141,32 @@ function Coin() {
               </OverviewItem>
             </Overview>
           </ContentsBox>
-          <ContentsBox>
-            <Tabs>
-              <Tab>
-                <Link to={`/${coinId}/price`}>Price</Link>
-              </Tab>
-              <Tab>
-                <Link to={`/${coinId}/chart`}>Chart</Link>
-              </Tab>
-            </Tabs>
-            <Switch>
-              <Route path={`/:coinId/price`}>
-                <Price />
-              </Route>
-              <Route path={`/:coinId/chart`}>
-                <Chart coinId={coinId} />
-              </Route>
-            </Switch>
-          </ContentsBox>
+          <Wrapper>
+            <ContentsBox>
+              <Calculator
+                coinPrice={tickerData?.quotes.USD.price || 0}
+                symbol={tickerData?.symbol || ""}
+              />
+            </ContentsBox>
+            <ContentsBox>
+              <Tabs>
+                <Tab>
+                  <Link to={`/${coinId}/price`}>Price</Link>
+                </Tab>
+                <Tab>
+                  <Link to={`/${coinId}/chart`}>Chart</Link>
+                </Tab>
+              </Tabs>
+              <Switch>
+                <Route path={`/:coinId/price`}>
+                  <Price tickerData={tickerData} isLoading={isLoading} />
+                </Route>
+                <Route path={`/:coinId/chart`}>
+                  <Chart coinId={coinId} />
+                </Route>
+              </Switch>
+            </ContentsBox>
+          </Wrapper>
         </>
       )}
     </Container>

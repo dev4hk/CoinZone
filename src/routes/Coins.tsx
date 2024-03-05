@@ -80,11 +80,11 @@ const CoinWrapper = styled.div`
   margin-right: 30px;
 `;
 
-const ChangeNumber = styled.span<{ isGain?: boolean }>`
+const ChangeNumber = styled.span<{ isgain: boolean }>`
   display: flex;
   align-items: center;
   color: ${(props) =>
-    props.isGain ? props.theme.gainColor : props.theme.loseColor};
+    props.isgain ? props.theme.gainColor : props.theme.loseColor};
 `;
 
 function Coins() {
@@ -143,7 +143,7 @@ function Coins() {
                       {coin.name}
                     </CoinWrapper>
                     <ChangeNumber
-                      isGain={coin.quotes.USD.percent_change_24h >= 0}
+                      isgain={coin.quotes.USD.percent_change_24h >= 0}
                     >
                       {coin.quotes.USD.percent_change_24h}%
                     </ChangeNumber>
@@ -164,7 +164,7 @@ function Coins() {
                       {coin.name}
                     </CoinWrapper>
                     <ChangeNumber
-                      isGain={coin.quotes.USD.percent_change_24h >= 0}
+                      isgain={coin.quotes.USD.percent_change_24h >= 0}
                     >
                       {coin.quotes.USD.percent_change_24h}%
                     </ChangeNumber>
