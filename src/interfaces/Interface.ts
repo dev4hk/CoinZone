@@ -1,3 +1,8 @@
+export interface ICalculator {
+  coinPrice: number;
+  name: string;
+}
+
 export interface ICoin {
   id: string;
   name: string;
