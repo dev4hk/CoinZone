@@ -10,9 +10,11 @@ const ChangeWrapper = styled.div`
   margin-top: 10px;
 `;
 const ChangeTitle = styled.span``;
-const ChangeNumber = styled.span<{ isNegative: boolean }>`
+const ChangeNumber = styled.span<{ isnegative: string }>`
   color: ${(props) =>
-    props.isNegative ? props.theme.loseColor : props.theme.gainColor};
+    props.isnegative === "true"
+      ? props.theme.loseColor
+      : props.theme.gainColor};
 `;
 
 interface PriceProps {
@@ -35,43 +37,71 @@ function Price({ tickerData, isLoading }: PriceProps) {
         <>
           <ChangeWrapper>
             <ChangeTitle>Rate - 1h</ChangeTitle>
-            <ChangeNumber isNegative={isNegative(priceObj?.percent_change_1h)}>
+            <ChangeNumber
+              isnegative={
+                isNegative(priceObj?.percent_change_1h) ? "true" : "false"
+              }
+            >
               {priceObj?.percent_change_1h}%
             </ChangeNumber>
           </ChangeWrapper>
           <ChangeWrapper>
             <ChangeTitle>Rate - 6h</ChangeTitle>
-            <ChangeNumber isNegative={isNegative(priceObj?.percent_change_6h)}>
+            <ChangeNumber
+              isnegative={
+                isNegative(priceObj?.percent_change_6h) ? "true" : "false"
+              }
+            >
               {priceObj?.percent_change_6h}%
             </ChangeNumber>
           </ChangeWrapper>
           <ChangeWrapper>
             <ChangeTitle>Rate - 12h</ChangeTitle>
-            <ChangeNumber isNegative={isNegative(priceObj?.percent_change_12h)}>
+            <ChangeNumber
+              isnegative={
+                isNegative(priceObj?.percent_change_12h) ? "true" : "false"
+              }
+            >
               {priceObj?.percent_change_12h}%
             </ChangeNumber>
           </ChangeWrapper>
           <ChangeWrapper>
             <ChangeTitle>Rate - 24h</ChangeTitle>
-            <ChangeNumber isNegative={isNegative(priceObj?.percent_change_24h)}>
+            <ChangeNumber
+              isnegative={
+                isNegative(priceObj?.percent_change_24h) ? "true" : "false"
+              }
+            >
               {priceObj?.percent_change_24h}%
             </ChangeNumber>
           </ChangeWrapper>
           <ChangeWrapper>
             <ChangeTitle>Rate - Week</ChangeTitle>
-            <ChangeNumber isNegative={isNegative(priceObj?.percent_change_7d)}>
+            <ChangeNumber
+              isnegative={
+                isNegative(priceObj?.percent_change_7d) ? "true" : "false"
+              }
+            >
               {priceObj?.percent_change_7d}%
             </ChangeNumber>
           </ChangeWrapper>
           <ChangeWrapper>
             <ChangeTitle>Rate - Month</ChangeTitle>
-            <ChangeNumber isNegative={isNegative(priceObj?.percent_change_30d)}>
+            <ChangeNumber
+              isnegative={
+                isNegative(priceObj?.percent_change_30d) ? "true" : "false"
+              }
+            >
               {priceObj?.percent_change_30d}%
             </ChangeNumber>
           </ChangeWrapper>
           <ChangeWrapper>
             <ChangeTitle>Rate - Year</ChangeTitle>
-            <ChangeNumber isNegative={isNegative(priceObj?.percent_change_1y)}>
+            <ChangeNumber
+              isnegative={
+                isNegative(priceObj?.percent_change_1y) ? "true" : "false"
+              }
+            >
               {priceObj?.percent_change_1y}%
             </ChangeNumber>
           </ChangeWrapper>

@@ -112,8 +112,8 @@ function Coins() {
             ))}
           </CoinsList>
           <Rankings>
-            <RankList data={top10Gainers || []} title="Top 10 Gainers" />
-            <RankList data={top10Losers || []} title="Top 10 Losers" />
+            <RankList data={top10Gainers ?? []} title="Top 10 Gainers" />
+            <RankList data={top10Losers ?? []} title="Top 10 Losers" />
           </Rankings>
         </ContentsBox>
       )}
