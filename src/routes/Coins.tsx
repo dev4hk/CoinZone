@@ -5,6 +5,7 @@ import { ICoin, ITicker } from "../interfaces/Interface";
 import { getSortedCoinsByPercentChanges } from "../services/service";
 import RankList from "../components/RankList";
 import CoinCard from "../components/CoinCard";
+import RankListOverall from "../components/RankListOverall";
 
 const Container = styled.div`
   display: flex;
@@ -62,7 +63,7 @@ function Coins() {
       ) : (
         <ContentsBox>
           <Rankings>
-            <RankList data={top10Gainers ?? []} title="Top 10 Overall" />
+            <RankListOverall data={top10Overall ?? []} title="Top 10 Overall" />
             <RankList data={top10Gainers ?? []} title="Top 10 Gainers" />
             <RankList data={top10Losers ?? []} title="Top 10 Losers" />
           </Rankings>

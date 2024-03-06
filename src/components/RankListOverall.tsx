@@ -21,7 +21,9 @@ const Img = styled.img`
   margin-right: 25px;
 `;
 
-const Ranking = styled.div``;
+const Index = styled.span`
+  width: 30px;
+`;
 
 const RankContainer = styled.div`
   display: flex;
@@ -50,32 +52,26 @@ const Subtitle = styled.h3`
   color: ${(props) => props.theme.accentColor};
 `;
 
-interface RankListProps {
-  data: ITicker[];
+interface RankListOverallProps {
+  data: ICoin[];
   title: string;
 }
 
-function RankList({ data, title }: RankListProps) {
+function RankListOverall({ data, title }: RankListOverallProps) {
   return (
     <RankWrapper>
       <Subtitle>{title}</Subtitle>
-      {data?.map((coin) => (
+      {data?.map((coin, index) => (
         <Link to={`/${coin.id}`} key={coin.id}>
           <RankContainer>
             <CoinWrapper>
+              <Index>{index + 1}.</Index>
               <Img
                 src={`https://static.coinpaprika.com/coin/${coin.id}/logo.png`}
                 alt=""
               />
               {coin.name}
             </CoinWrapper>
-            <ChangeNumber
-              isgain={
-                coin.quotes.USD.percent_change_24h >= 0 ? "true" : "false"
-              }
-            >
-              {coin.quotes.USD.percent_change_24h}%
-            </ChangeNumber>
           </RankContainer>
         </Link>
       ))}
@@ -83,4 +79,4 @@ function RankList({ data, title }: RankListProps) {
   );
 }
 
-export default RankList;
+export default RankListOverall;
