@@ -39,7 +39,7 @@ const RankWrapper = styled.div`
   display: flex;
   flex-direction: column;
   padding: 20px;
-  max-width: 768px;
+  width: 350px;
   background-color: ${(props) => props.theme.contentBgColor};
   border-radius: 20px;
   margin: 10px 0px;
@@ -61,7 +61,7 @@ function RankList({ data, title }: RankListProps) {
       <Subtitle>{title}</Subtitle>
       {data?.map((coin) => (
         <Link to={`/${coin.id}`} key={coin.id}>
-          <RankContainer key={coin.id}>
+          <RankContainer>
             <CoinWrapper>
               <Img
                 src={`https://static.coinpaprika.com/coin/${coin.id}/logo.png`}

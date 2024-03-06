@@ -14,23 +14,24 @@ const Container = styled.div`
 `;
 
 const ContentsBox = styled.div`
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   padding: 20px;
   width: 100%;
 `;
 
 const CoinsList = styled.ul`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+  padding: 0;
 `;
 
 const Rankings = styled.div`
-  padding: 20px;
-  position: sticky;
-  align-self: flex-start;
-  top: 20px;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 10px;
 `;
 
 function Coins() {
@@ -61,13 +62,13 @@ function Coins() {
       ) : (
         <ContentsBox>
           <Rankings>
-            <RankList data={top10Gainers ?? []} title="Top 10 Gainers" />
+            <RankList data={top10Gainers ?? []} title="Top 10 Overall" />
             <RankList data={top10Gainers ?? []} title="Top 10 Gainers" />
             <RankList data={top10Losers ?? []} title="Top 10 Losers" />
           </Rankings>
           <CoinsList>
-            {coinsData?.map((coin) => (
-              <CoinCard coin={coin} />
+            {coinsData?.slice(0, 12).map((coin) => (
+              <CoinCard coin={coin} key={coin.id} />
             ))}
           </CoinsList>
         </ContentsBox>
