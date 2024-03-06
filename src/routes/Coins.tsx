@@ -4,6 +4,7 @@ import styled from "styled-components";
 import { fetchCoins, fetchTickers } from "../services/api";
 import { ICoin, IInfo, ITicker } from "../interfaces/Interface";
 import { getSortedCoinsByPercentChanges } from "../services/service";
+import RankList from "../components/RankList";
 
 const Container = styled.div`
   display: flex;
@@ -32,20 +33,6 @@ const CoinsList = styled.ul``;
 
 const Rankings = styled.div`
   padding: 20px;
-`;
-
-const Ranking = styled.div``;
-
-const RankContainer = styled.div`
-  display: flex;
-  justify-content: space-between;
-  margin-bottom: 5px;
-  font-size: ${(props) => props.theme.fontSize};
-  cursor: pointer;
-  transition: all 0.2s ease-in;
-  &:hover {
-    color: ${(props) => props.theme.hoverColor};
-  }
 `;
 
 const Coin = styled.li`
@@ -80,13 +67,6 @@ const CoinWrapper = styled.div`
   margin-right: 30px;
 `;
 
-const ChangeNumber = styled.span<{ isgain: boolean }>`
-  display: flex;
-  align-items: center;
-  color: ${(props) =>
-    props.isgain ? props.theme.gainColor : props.theme.loseColor};
-`;
-
 function Coins() {
   const { isLoading: isCoinsLoading, data: coinsData } = useQuery<ICoin[]>(
     "coins",
@@ -106,11 +86,13 @@ function Coins() {
   const top10Gainers = sortedCoins?.slice(90, 100).reverse();
   const top10Losers = sortedCoins?.slice(0, 10);
 
+  const isLoading = isCoinsLoading || isTickersLoading;
+
   return (
     <Container>
       <Title>Explore Coins!</Title>
       <Subtitle>Click Coin(s) You Are Interested To See More Info</Subtitle>
-      {isCoinsLoading ? (
+      {isLoading ? (
         "loading..."
       ) : (
         <ContentsBox>
@@ -130,48 +112,8 @@ function Coins() {
             ))}
           </CoinsList>
           <Rankings>
-            <Ranking>
-              <Subtitle>Top 10 Gainers</Subtitle>
-              {top10Gainers?.map((coin) => (
-                <Link to={`/${coin.id}`}>
-                  <RankContainer key={coin.id}>
-                    <CoinWrapper>
-                      <Img
-                        src={`https://static.coinpaprika.com/coin/${coin.id}/logo.png`}
-                        alt=""
-                      />
-                      {coin.name}
-                    </CoinWrapper>
-                    <ChangeNumber
-                      isgain={coin.quotes.USD.percent_change_24h >= 0}
-                    >
-                      {coin.quotes.USD.percent_change_24h}%
-                    </ChangeNumber>
-                  </RankContainer>
-                </Link>
-              ))}
-            </Ranking>
-            <Ranking>
-              <Subtitle>Top 10 Losers</Subtitle>
-              {top10Losers?.map((coin) => (
-                <Link to={`/${coin.id}`}>
-                  <RankContainer key={coin.id}>
-                    <CoinWrapper>
-                      <Img
-                        src={`https://static.coinpaprika.com/coin/${coin.id}/logo.png`}
-                        alt=""
-                      />
-                      {coin.name}
-                    </CoinWrapper>
-                    <ChangeNumber
-                      isgain={coin.quotes.USD.percent_change_24h >= 0}
-                    >
-                      {coin.quotes.USD.percent_change_24h}%
-                    </ChangeNumber>
-                  </RankContainer>
-                </Link>
-              ))}
-            </Ranking>
+            <RankList data={top10Gainers || []} title="Top 10 Gainers" />
+            <RankList data={top10Losers || []} title="Top 10 Losers" />
           </Rankings>
         </ContentsBox>
       )}
