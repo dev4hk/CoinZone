@@ -36,7 +36,7 @@ const Label = styled.label`
   right: 0;
   margin-right: 7px;
   color: ${(props) => props.theme.contentBgColor};
-  font-size: ${(props) => props.theme.fontSize};
+  font-size: 13px;
 `;
 const InputGroups = styled.div`
   display: flex;

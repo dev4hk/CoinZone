@@ -8,11 +8,24 @@ import Calculator from "../components/Calculator";
 import Chart from "../components/Chart";
 
 const Container = styled.div`
-  display: flex;
-  height: 90vh;
-  justify-content: space-around;
-  align-items: center;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
   padding: 0px 20px;
+`;
+
+const ContentsBox = styled.div`
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+  max-width: 768px;
+  background-color: ${(props) => props.theme.contentBgColor};
+  border-radius: 20px;
+  margin: 10px 0px;
+`;
+
+const Description = styled.p`
+  font-size: ${(props) => props.theme.fontSize};
+  line-height: 2cap;
 `;
 
 const Overview = styled.div`
@@ -44,32 +57,6 @@ const Subtitle = styled.h3`
   text-align: center;
 `;
 
-const Description = styled.p`
-  font-size: ${(props) => props.theme.fontSize};
-  line-height: 2cap;
-`;
-
-const ContentsBox = styled.div`
-  display: flex;
-  flex-direction: column;
-  padding: 20px;
-  width: 40vw;
-  background-color: ${(props) => props.theme.contentBgColor};
-  border-radius: 20px;
-`;
-
-const Wrapper = styled.div`
-  display: flex;
-  flex-direction: column;
-`;
-
-const Tabs = styled.div`
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  margin: 2px 0px;
-  gap: 10px;
-`;
-
 const Tab = styled.span`
   text-align: center;
   cursor: pointer;
@@ -80,6 +67,19 @@ const Tab = styled.span`
     padding: 7px 0px;
     display: block;
   }
+`;
+
+const Tabs = styled.div`
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  margin: 2px 0px;
+  gap: 10px;
+`;
+
+const Wrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  width: 550px;
 `;
 
 function Coin() {
@@ -101,54 +101,49 @@ function Coin() {
         <h2>Loading...</h2>
       ) : (
         <>
-          <ContentsBox>
-            <Subtitle>{infoData?.name}</Subtitle>
-            <Overview>
-              <OverviewItem>
-                <OverviewItemDetail>Rank:</OverviewItemDetail>
-                <OverviewItemDetail>{infoData?.rank}</OverviewItemDetail>
-              </OverviewItem>
-              <OverviewItem>
-                <OverviewItemDetail>Symbol:</OverviewItemDetail>
-                <OverviewItemDetail>{infoData?.symbol}</OverviewItemDetail>
-              </OverviewItem>
-              <OverviewItem>
-                <OverviewItemDetail>Started At:</OverviewItemDetail>
-                <OverviewItemDetail>
-                  {trimDateTime(infoData?.started_at || "")}
-                </OverviewItemDetail>
-              </OverviewItem>
-              <OverviewItem>
-                <OverviewItemDetail>Is Active?</OverviewItemDetail>
-                <OverviewItemDetail>
-                  {infoData?.is_active ? "Yes" : "No"}
-                </OverviewItemDetail>
-              </OverviewItem>
-            </Overview>
-            <Description>
-              {infoData?.description || "Description Not Available."}
-            </Description>
-            <Overview>
-              <OverviewItem>
-                <OverviewItemDetail>Total Supply:</OverviewItemDetail>
-                <OverviewItemDetail>
-                  {tickerData?.total_supply}
-                </OverviewItemDetail>
-              </OverviewItem>
-              <OverviewItem>
-                <OverviewItemDetail>Max Supply:</OverviewItemDetail>
-                <OverviewItemDetail>
-                  {tickerData?.max_supply}
-                </OverviewItemDetail>
-              </OverviewItem>
-            </Overview>
-          </ContentsBox>
+          <div></div>
           <Wrapper>
             <ContentsBox>
-              <Calculator
-                coinPrice={tickerData?.quotes.USD.price || 0}
-                symbol={tickerData?.symbol || ""}
-              />
+              <Subtitle>{infoData?.name}</Subtitle>
+              <Overview>
+                <OverviewItem>
+                  <OverviewItemDetail>Rank:</OverviewItemDetail>
+                  <OverviewItemDetail>{infoData?.rank}</OverviewItemDetail>
+                </OverviewItem>
+                <OverviewItem>
+                  <OverviewItemDetail>Symbol:</OverviewItemDetail>
+                  <OverviewItemDetail>{infoData?.symbol}</OverviewItemDetail>
+                </OverviewItem>
+                <OverviewItem>
+                  <OverviewItemDetail>Started At:</OverviewItemDetail>
+                  <OverviewItemDetail>
+                    {trimDateTime(infoData?.started_at || "")}
+                  </OverviewItemDetail>
+                </OverviewItem>
+                <OverviewItem>
+                  <OverviewItemDetail>Is Active?</OverviewItemDetail>
+                  <OverviewItemDetail>
+                    {infoData?.is_active ? "Yes" : "No"}
+                  </OverviewItemDetail>
+                </OverviewItem>
+              </Overview>
+              <Description>
+                {infoData?.description || "Description Not Available."}
+              </Description>
+              <Overview>
+                <OverviewItem>
+                  <OverviewItemDetail>Total Supply:</OverviewItemDetail>
+                  <OverviewItemDetail>
+                    {tickerData?.total_supply}
+                  </OverviewItemDetail>
+                </OverviewItem>
+                <OverviewItem>
+                  <OverviewItemDetail>Max Supply:</OverviewItemDetail>
+                  <OverviewItemDetail>
+                    {tickerData?.max_supply}
+                  </OverviewItemDetail>
+                </OverviewItem>
+              </Overview>
             </ContentsBox>
             <ContentsBox>
               <Tabs>
@@ -167,6 +162,14 @@ function Coin() {
                   <Chart coinId={coinId} />
                 </Route>
               </Switch>
+            </ContentsBox>
+          </Wrapper>
+          <Wrapper>
+            <ContentsBox>
+              <Calculator
+                coinPrice={tickerData?.quotes.USD.price || 0}
+                symbol={tickerData?.symbol || ""}
+              />
             </ContentsBox>
           </Wrapper>
         </>

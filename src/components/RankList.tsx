@@ -35,6 +35,16 @@ const RankContainer = styled.div`
   }
 `;
 
+const RankWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+  max-width: 768px;
+  background-color: ${(props) => props.theme.contentBgColor};
+  border-radius: 20px;
+  margin: 10px 0px;
+`;
+
 const Subtitle = styled.h3`
   font-size: ${(props) => props.theme.subtitleFontSize};
   color: ${(props) => props.theme.accentColor};
@@ -47,7 +57,7 @@ interface RankListProps {
 
 function RankList({ data, title }: RankListProps) {
   return (
-    <Ranking>
+    <RankWrapper>
       <Subtitle>{title}</Subtitle>
       {data?.map((coin) => (
         <Link to={`/${coin.id}`} key={coin.id}>
@@ -69,7 +79,7 @@ function RankList({ data, title }: RankListProps) {
           </RankContainer>
         </Link>
       ))}
-    </Ranking>
+    </RankWrapper>
   );
 }
 
