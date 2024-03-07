@@ -47,8 +47,11 @@ const Rankings = styled.div`
 
 const Subtitle = styled.div`
   display: flex;
-  justify-content: start;
+  justify-content: center;
+  border-bottom: 1px solid ${(props) => props.theme.textColor};
+  width: 100%;
   font-size: ${(props) => props.theme.subtitleFontSize};
+  padding: 10px 0px;
 `;
 
 function Coins() {
@@ -86,7 +89,7 @@ function Coins() {
             <RankList data={top10Gainers ?? []} title="Top 10 Gainers" />
             <RankList data={top10Losers ?? []} title="Top 10 Losers" />
           </Rankings>
-          <Subtitle>Coins</Subtitle>
+          <Subtitle>More Coins</Subtitle>
           <CoinsList>
             {coinsData?.map((coin) => (
               <CoinCard coin={coin} key={coin.id} />
