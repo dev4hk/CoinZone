@@ -36,7 +36,7 @@ const RankContainer = styled.div`
 const RankWrapper = styled.div`
   display: flex;
   flex-direction: column;
-  padding: 20px;
+  padding: 0px 20px 20px 20px;
   width: 350px;
   background-color: ${(props) => props.theme.contentBgColor};
   border-radius: 20px;
