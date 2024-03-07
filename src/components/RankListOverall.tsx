@@ -21,7 +21,7 @@ const Img = styled.img`
   margin-right: 25px;
 `;
 
-const Index = styled.span`
+const Index = styled.div`
   width: 30px;
 `;
 
@@ -31,8 +31,8 @@ const RankContainer = styled.div`
   margin-bottom: 5px;
   font-size: ${(props) => props.theme.fontSize};
   cursor: pointer;
-  transition: all 0.2s ease-in;
-  &:hover {
+  &:hover span {
+    transition: all 0.2s ease-in;
     color: ${(props) => props.theme.hoverColor};
   }
 `;
@@ -70,7 +70,7 @@ function RankListOverall({ data, title }: RankListOverallProps) {
                 src={`https://static.coinpaprika.com/coin/${coin.id}/logo.png`}
                 alt=""
               />
-              {coin.name}
+              <span>{coin.name}</span>
             </CoinWrapper>
           </RankContainer>
         </Link>

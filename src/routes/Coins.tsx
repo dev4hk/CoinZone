@@ -6,6 +6,7 @@ import { getSortedCoinsByPercentChanges } from "../services/service";
 import RankList from "../components/RankList";
 import CoinCard from "../components/CoinCard";
 import RankListOverall from "../components/RankListOverall";
+import { Link } from "react-router-dom";
 
 const Container = styled.div`
   display: flex;
@@ -19,7 +20,6 @@ const ContentsBox = styled.div`
   flex-direction: column;
   align-items: center;
   padding: 20px;
-  width: 100%;
 `;
 
 const CoinsList = styled.ul`
@@ -27,12 +27,28 @@ const CoinsList = styled.ul`
   grid-template-columns: repeat(3, 1fr);
   gap: 10px;
   padding: 0;
+
+  @media screen and (max-width: 720px) {
+    display: flex;
+    flex-direction: column;
+  }
 `;
 
 const Rankings = styled.div`
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
   gap: 10px;
+  margin-bottom: 20px;
+  @media screen and (max-width: 720px) {
+    display: flex;
+    flex-direction: column;
+  }
+`;
+
+const Subtitle = styled.div`
+  display: flex;
+  justify-content: start;
+  font-size: ${(props) => props.theme.subtitleFontSize};
 `;
 
 function Coins() {
@@ -40,7 +56,7 @@ function Coins() {
     "coins",
     fetchCoins,
     {
-      select: (data) => data.slice(0, 100),
+      select: (data) => data.slice(0, 99),
     }
   );
 
@@ -63,12 +79,16 @@ function Coins() {
       ) : (
         <ContentsBox>
           <Rankings>
-            <RankListOverall data={top10Overall ?? []} title="Top 10 Overall" />
+            <RankListOverall
+              data={top10Overall ?? []}
+              title="Top 10 Rankings"
+            />
             <RankList data={top10Gainers ?? []} title="Top 10 Gainers" />
             <RankList data={top10Losers ?? []} title="Top 10 Losers" />
           </Rankings>
+          <Subtitle>Coins</Subtitle>
           <CoinsList>
-            {coinsData?.slice(0, 12).map((coin) => (
+            {coinsData?.map((coin) => (
               <CoinCard coin={coin} key={coin.id} />
             ))}
           </CoinsList>

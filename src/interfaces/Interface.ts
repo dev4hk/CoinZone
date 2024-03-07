@@ -5,6 +5,7 @@ export interface ICalculator {
 
 export interface IChartProps {
   coinId: string;
+  data: ICoinHistory[];
 }
 
 export interface ICoin {

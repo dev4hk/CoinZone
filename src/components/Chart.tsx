@@ -5,15 +5,10 @@ import ReactApexChart from "react-apexcharts";
 
 const PERIOD_1Y = "1y";
 
-function Chart({ coinId }: IChartProps) {
-  const { isLoading, data } = useQuery<ICoinHistory[]>(["ohlcv", coinId], () =>
-    fetchCoinHistory(coinId, PERIOD_1Y)
-  );
+function Chart({ coinId, data }: IChartProps) {
   return (
     <div>
-      {isLoading ? (
-        "Loading..."
-      ) : !Array.isArray(data) ? (
+      {data.length === 0 ? (
         "Data Not Available"
       ) : (
         <ReactApexChart
@@ -21,13 +16,11 @@ function Chart({ coinId }: IChartProps) {
           options={{
             theme: { mode: "dark" },
             chart: {
-              height: 500,
-              width: 500,
               background: "transparent",
               toolbar: { show: false },
             },
             stroke: { curve: "smooth", width: 3 },
-            grid: { show: false },
+            // grid: { show: false },
             tooltip: {
               enabled: true,
               y: {
@@ -37,7 +30,7 @@ function Chart({ coinId }: IChartProps) {
                 show: true,
               },
             },
-            yaxis: { show: false },
+            // yaxis: { show: false },
             xaxis: {
               labels: { show: false },
               axisTicks: { show: false },

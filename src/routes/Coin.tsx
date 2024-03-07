@@ -2,14 +2,18 @@ import { Link, Route, Switch, useParams } from "react-router-dom";
 import styled from "styled-components";
 import Price from "../components/Price";
 import { useQuery } from "react-query";
-import { fetchCoinInfo, fetchCoinTicker } from "../services/api";
-import { IInfo, ITicker, Params } from "../interfaces/Interface";
+import {
+  fetchCoinHistory,
+  fetchCoinInfo,
+  fetchCoinTicker,
+} from "../services/api";
+import { ICoinHistory, IInfo, ITicker, Params } from "../interfaces/Interface";
 import Calculator from "../components/Calculator";
 import Chart from "../components/Chart";
 
 const Container = styled.div`
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-columns: 1fr 2fr;
   padding: 0px 20px;
 `;
 
@@ -17,10 +21,14 @@ const ContentsBox = styled.div`
   display: flex;
   flex-direction: column;
   padding: 20px;
-  max-width: 768px;
   background-color: ${(props) => props.theme.contentBgColor};
   border-radius: 20px;
   margin: 10px 0px;
+  height: 80vh;
+
+  &:first-child {
+    max-width: 768px;
+  }
 `;
 
 const Description = styled.p`
@@ -80,7 +88,12 @@ const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
   width: 550px;
+  &:first-child {
+    width: 550px;
+  }
 `;
+
+const PERIOD_1Y = "1y";
 
 function Coin() {
   const { coinId } = useParams<Params>();
@@ -92,8 +105,11 @@ function Coin() {
     ["ticker", coinId],
     () => fetchCoinTicker(coinId)
   );
+  const { isLoading: isHistoryLoading, data: historyData } = useQuery<
+    ICoinHistory[]
+  >(["ohlcv", coinId], () => fetchCoinHistory(coinId, PERIOD_1Y));
 
-  const isLoading = isInfoLoading || isTickerLoading;
+  const isLoading = isInfoLoading || isTickerLoading || isHistoryLoading;
 
   return (
     <Container>
@@ -101,7 +117,6 @@ function Coin() {
         <h2>Loading...</h2>
       ) : (
         <>
-          <div></div>
           <Wrapper>
             <ContentsBox>
               <Subtitle>{infoData?.name}</Subtitle>
@@ -144,34 +159,22 @@ function Coin() {
                   </OverviewItemDetail>
                 </OverviewItem>
               </Overview>
-            </ContentsBox>
-            <ContentsBox>
-              <Tabs>
-                <Tab>
-                  <Link to={`/${coinId}/price`}>Price</Link>
-                </Tab>
-                <Tab>
-                  <Link to={`/${coinId}/chart`}>Chart</Link>
-                </Tab>
-              </Tabs>
-              <Switch>
-                <Route path={`/:coinId/price`}>
-                  <Price tickerData={tickerData} isLoading={isLoading} />
-                </Route>
-                <Route path={`/:coinId/chart`}>
-                  <Chart coinId={coinId} />
-                </Route>
-              </Switch>
-            </ContentsBox>
-          </Wrapper>
-          <Wrapper>
-            <ContentsBox>
               <Calculator
                 coinPrice={tickerData?.quotes.USD.price || 0}
                 symbol={tickerData?.symbol || ""}
               />
+              <Price tickerData={tickerData} isLoading={isLoading} />
             </ContentsBox>
           </Wrapper>
+          {/* <Wrapper> */}
+          {/* <ContentsBox> */}
+          <Wrapper>
+            <ContentsBox>
+              <Chart coinId={coinId} data={historyData ?? []} />
+            </ContentsBox>
+          </Wrapper>
+          {/* </ContentsBox> */}
+          {/* </Wrapper> */}
         </>
       )}
     </Container>

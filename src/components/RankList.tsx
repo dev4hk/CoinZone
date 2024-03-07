@@ -21,8 +21,6 @@ const Img = styled.img`
   margin-right: 25px;
 `;
 
-const Ranking = styled.div``;
-
 const RankContainer = styled.div`
   display: flex;
   justify-content: space-between;

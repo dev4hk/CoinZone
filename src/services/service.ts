@@ -6,3 +6,7 @@ export function getSortedCoinsByPercentChanges(coins?: ITicker[]) {
       coinA.quotes.USD.percent_change_24h - coinB.quotes.USD.percent_change_24h
   );
 }
+
+export function trimDateTime(str: string) {
+  return str.slice(0, 10);
+}
