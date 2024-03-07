@@ -52,6 +52,7 @@ const Subtitle = styled.div`
   width: 100%;
   font-size: ${(props) => props.theme.subtitleFontSize};
   padding: 10px 0px;
+  margin-bottom: 10px;
 `;
 
 function Coins() {
