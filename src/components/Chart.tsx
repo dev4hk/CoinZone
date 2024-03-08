@@ -1,11 +1,9 @@
-import { useQuery } from "react-query";
-import { IChartProps, ICoinHistory } from "../interfaces/Interface";
-import { fetchCoinHistory } from "../services/api";
+import { IChartProps } from "../interfaces/Interface";
 import ReactApexChart from "react-apexcharts";
 
 const PERIOD_1Y = "1y";
 
-function Chart({ coinId, data }: IChartProps) {
+function Chart({ data }: IChartProps) {
   return (
     <div>
       {data.length === 0 ? (

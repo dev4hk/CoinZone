@@ -1,13 +1,6 @@
 import { Link } from "react-router-dom";
 import styled from "styled-components";
-import { ICoin, ITicker } from "../interfaces/Interface";
-
-const ChangeNumber = styled.span<{ isgain: string }>`
-  display: flex;
-  align-items: center;
-  color: ${(props) =>
-    props.isgain === "true" ? props.theme.gainColor : props.theme.loseColor};
-`;
+import { ICoin } from "../interfaces/Interface";
 
 const CoinWrapper = styled.div`
   display: flex;

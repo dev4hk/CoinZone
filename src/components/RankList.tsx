@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import styled from "styled-components";
-import { ICoin, ITicker } from "../interfaces/Interface";
+import { ITicker } from "../interfaces/Interface";
 
 const ChangeNumber = styled.span<{ isgain: string }>`
   display: flex;

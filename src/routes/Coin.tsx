@@ -1,4 +1,4 @@
-import { Link, Route, Switch, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import styled from "styled-components";
 import Price from "../components/Price";
 import { useQuery } from "react-query";
@@ -10,12 +10,12 @@ import {
 import { ICoinHistory, IInfo, ITicker, Params } from "../interfaces/Interface";
 import Calculator from "../components/Calculator";
 import Chart from "../components/Chart";
+import { trimDateTime } from "../services/service";
 
 const Container = styled.div`
   display: grid;
   grid-template-columns: 1fr 2fr;
   padding: 0px 20px;
-  /* background-color: orange; */
   height: 95vh;
   gap: 20px;
 
@@ -32,7 +32,6 @@ const ContentsBox = styled.div`
   background-color: ${(props) => props.theme.contentBgColor};
   border-radius: 20px;
   margin: 10px 0px;
-  /* height: auto; */
 `;
 
 const Description = styled.p`
@@ -68,25 +67,6 @@ const Subtitle = styled.h3`
   font-size: ${(props) => props.theme.subtitleFontSize};
   color: ${(props) => props.theme.accentColor};
   text-align: center;
-`;
-
-const Tab = styled.span`
-  text-align: center;
-  cursor: pointer;
-  font-size: ${(props) => props.theme.subtitleFontSize};
-  background-color: rgba(0, 0, 0, 0.5);
-  border-radius: 10px;
-  a {
-    padding: 7px 0px;
-    display: block;
-  }
-`;
-
-const Tabs = styled.div`
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  margin: 2px 0px;
-  gap: 10px;
 `;
 
 const Wrapper = styled.div`
@@ -184,10 +164,6 @@ function Coin() {
       )}
     </Container>
   );
-}
-
-function trimDateTime(str: string) {
-  return str.slice(0, 10);
 }
 
 export default Coin;

@@ -6,7 +6,6 @@ import { getSortedCoinsByPercentChanges } from "../services/service";
 import RankList from "../components/RankList";
 import CoinCard from "../components/CoinCard";
 import RankListOverall from "../components/RankListOverall";
-import { Link } from "react-router-dom";
 
 const Container = styled.div`
   display: flex;
