@@ -2,11 +2,18 @@ import styled from "styled-components";
 import { ICalculator } from "../interfaces/Interface";
 import { useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCalculator, faEquals } from "@fortawesome/free-solid-svg-icons";
+import {
+  faArrowsLeftRight,
+  faCalculator,
+} from "@fortawesome/free-solid-svg-icons";
 
-const Container = styled.div``;
+const Container = styled.div`
+  margin: 20px 0px;
+`;
 const Subtitle = styled.p`
   margin-top: 0;
+  display: flex;
+  justify-content: center;
 `;
 
 const IconWrapper = styled.div`
@@ -40,6 +47,7 @@ const Label = styled.label`
 `;
 const InputGroups = styled.div`
   display: flex;
+  justify-content: center;
 `;
 const InputGroup = styled.div`
   position: relative;
@@ -80,7 +88,7 @@ function Calculator({ coinPrice, symbol }: ICalculator) {
           <Label htmlFor="coinValue">{symbol}</Label>
         </InputGroup>
         <IconWrapper>
-          <FontAwesomeIcon icon={faEquals} />
+          <FontAwesomeIcon icon={faArrowsLeftRight} />
         </IconWrapper>
         <InputGroup>
           <Input
