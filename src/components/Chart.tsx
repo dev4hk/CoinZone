@@ -20,7 +20,6 @@ function Chart({ coinId, data }: IChartProps) {
               toolbar: { show: false },
             },
             stroke: { curve: "smooth", width: 3 },
-            // grid: { show: false },
             tooltip: {
               enabled: true,
               y: {
@@ -30,7 +29,6 @@ function Chart({ coinId, data }: IChartProps) {
                 show: true,
               },
             },
-            // yaxis: { show: false },
             xaxis: {
               labels: { show: false },
               axisTicks: { show: false },
@@ -44,6 +42,19 @@ function Chart({ coinId, data }: IChartProps) {
               gradient: { gradientToColors: ["blue"], stops: [0, 100] },
             },
             colors: ["red"],
+            responsive: [
+              {
+                breakpoint: 720,
+                options: {
+                  grid: {
+                    show: false,
+                  },
+                  yaxis: {
+                    show: false,
+                  },
+                },
+              },
+            ],
           }}
           series={[
             {

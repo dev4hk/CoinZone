@@ -15,6 +15,14 @@ const Container = styled.div`
   display: grid;
   grid-template-columns: 1fr 2fr;
   padding: 0px 20px;
+  /* background-color: orange; */
+  height: 95vh;
+  gap: 20px;
+
+  @media screen and (max-width: 720px) {
+    display: flex;
+    flex-direction: column;
+  }
 `;
 
 const ContentsBox = styled.div`
@@ -24,16 +32,13 @@ const ContentsBox = styled.div`
   background-color: ${(props) => props.theme.contentBgColor};
   border-radius: 20px;
   margin: 10px 0px;
-  height: 80vh;
-
-  &:first-child {
-    max-width: 768px;
-  }
+  /* height: auto; */
 `;
 
 const Description = styled.p`
   font-size: ${(props) => props.theme.fontSize};
   line-height: 2cap;
+  text-align: center;
 `;
 
 const Overview = styled.div`
@@ -87,10 +92,8 @@ const Tabs = styled.div`
 const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
-  width: 550px;
-  &:first-child {
-    width: 550px;
-  }
+  justify-content: center;
+  padding: 0px 20px;
 `;
 
 const PERIOD_1Y = "1y";
@@ -136,9 +139,9 @@ function Coin() {
                   </OverviewItemDetail>
                 </OverviewItem>
                 <OverviewItem>
-                  <OverviewItemDetail>Is Active?</OverviewItemDetail>
+                  <OverviewItemDetail>Price:</OverviewItemDetail>
                   <OverviewItemDetail>
-                    {infoData?.is_active ? "Yes" : "No"}
+                    {tickerData?.quotes.USD.price.toFixed(6)}
                   </OverviewItemDetail>
                 </OverviewItem>
               </Overview>
@@ -158,6 +161,12 @@ function Coin() {
                     {tickerData?.max_supply}
                   </OverviewItemDetail>
                 </OverviewItem>
+                <OverviewItem>
+                  <OverviewItemDetail>Is Active?</OverviewItemDetail>
+                  <OverviewItemDetail>
+                    {infoData?.is_active ? "Yes" : "No"}
+                  </OverviewItemDetail>
+                </OverviewItem>
               </Overview>
               <Calculator
                 coinPrice={tickerData?.quotes.USD.price || 0}
@@ -166,15 +175,11 @@ function Coin() {
               <Price tickerData={tickerData} isLoading={isLoading} />
             </ContentsBox>
           </Wrapper>
-          {/* <Wrapper> */}
-          {/* <ContentsBox> */}
           <Wrapper>
             <ContentsBox>
               <Chart coinId={coinId} data={historyData ?? []} />
             </ContentsBox>
           </Wrapper>
-          {/* </ContentsBox> */}
-          {/* </Wrapper> */}
         </>
       )}
     </Container>

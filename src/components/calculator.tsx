@@ -37,6 +37,15 @@ const Input = styled.input.attrs({
     -webkit-appearance: none;
     margin: 0;
   }
+  @media screen and (max-width: 720px) {
+    width: 350px;
+    &:first-child {
+      margin-bottom: 10px;
+    }
+    &:nth-child(1) {
+      margin-top: 10px;
+    }
+  }
 `;
 const Label = styled.label`
   position: absolute;
@@ -48,6 +57,12 @@ const Label = styled.label`
 const InputGroups = styled.div`
   display: flex;
   justify-content: center;
+
+  @media screen and (max-width: 720px) {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
 `;
 const InputGroup = styled.div`
   position: relative;
