@@ -10,12 +10,12 @@ const Coin = styled.li`
   width: 350px;
   border-radius: 15px;
   transition: all 0.2s ease-in;
+  cursor: pointer;
   a {
     padding: 20px;
     display: block;
   }
   &:hover {
-    cursor: pointer;
     border: 1px solid ${(props) => props.theme.accentColor};
     background-color: ${(props) => props.theme.bgColor};
     color: ${(props) => props.theme.hoverColor};

@@ -6,12 +6,17 @@ import { getSortedCoinsByPercentChanges } from "../services/service";
 import RankList from "../components/RankList";
 import CoinCard from "../components/CoinCard";
 import RankListOverall from "../components/RankListOverall";
+import HomeImage from "../assets/images/home.jpg";
+const Banner = styled.div`
+  width: 100%;
+  position: relative;
+`;
 
 const Container = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 0px 20px;
+  margin: 0px;
 `;
 
 const ContentsBox = styled.div`
@@ -31,6 +36,24 @@ const CoinsList = styled.ul`
     display: flex;
     flex-direction: column;
   }
+`;
+
+const Description = styled.div`
+  color: ${(props) => props.theme.accentColor};
+`;
+
+const Detail = styled.div`
+  position: absolute;
+  width: 100%;
+  text-align: center;
+  top: 150px;
+`;
+
+const Img = styled.img<{ image: string }>`
+  content: url(${(props) => props.image});
+  width: 100%;
+  height: 400px;
+  object-fit: cover;
 `;
 
 const Rankings = styled.div`
@@ -53,6 +76,8 @@ const Subtitle = styled.div`
   padding: 10px 0px;
   margin-bottom: 10px;
 `;
+
+const Title = styled.h1``;
 
 function Coins() {
   const { isLoading: isCoinsLoading, data: coinsData } = useQuery<ICoin[]>(
@@ -80,22 +105,33 @@ function Coins() {
       {isLoading ? (
         "loading..."
       ) : (
-        <ContentsBox>
-          <Rankings>
-            <RankListOverall
-              data={top10Overall ?? []}
-              title="Top 10 Rankings"
-            />
-            <RankList data={top10Gainers ?? []} title="Top 10 Gainers" />
-            <RankList data={top10Losers ?? []} title="Top 10 Losers" />
-          </Rankings>
-          <Subtitle>More Coins</Subtitle>
-          <CoinsList>
-            {coinsData?.map((coin) => (
-              <CoinCard coin={coin} key={coin.id} />
-            ))}
-          </CoinsList>
-        </ContentsBox>
+        <>
+          <Banner>
+            <Img image={HomeImage} />
+            <Detail>
+              <Title>Coin Zone</Title>
+              <Description>
+                Get All The info Regarding Your Favorite Crypto Currency
+              </Description>
+            </Detail>
+          </Banner>
+          <ContentsBox>
+            <Rankings>
+              <RankListOverall
+                data={top10Overall ?? []}
+                title="Top 10 Rankings"
+              />
+              <RankList data={top10Gainers ?? []} title="Top 10 Gainers" />
+              <RankList data={top10Losers ?? []} title="Top 10 Losers" />
+            </Rankings>
+            <Subtitle>More Coins</Subtitle>
+            <CoinsList>
+              {coinsData?.map((coin) => (
+                <CoinCard coin={coin} key={coin.id} />
+              ))}
+            </CoinsList>
+          </ContentsBox>
+        </>
       )}
     </Container>
   );
