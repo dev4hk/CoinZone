@@ -56,6 +56,14 @@ const Img = styled.img<{ image: string }>`
   object-fit: cover;
 `;
 
+const Loading = styled.div`
+  display: flex;
+  height: 100vh;
+  justify-content: center;
+  align-items: center;
+  font-size: ${(props) => props.theme.subtitleFontSize};
+`;
+
 const Rankings = styled.div`
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
@@ -103,7 +111,7 @@ function Coins() {
   return (
     <Container>
       {isLoading ? (
-        "loading..."
+        <Loading>Loading...</Loading>
       ) : (
         <>
           <Banner>

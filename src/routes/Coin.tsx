@@ -40,6 +40,14 @@ const Description = styled.p`
   text-align: center;
 `;
 
+const Loading = styled.div`
+  display: flex;
+  height: 100vh;
+  justify-content: center;
+  align-items: center;
+  font-size: ${(props) => props.theme.subtitleFontSize};
+`;
+
 const Overview = styled.div`
   background-color: ${(props) => props.theme.bgColor};
   display: flex;
@@ -97,7 +105,7 @@ function Coin() {
   return (
     <Container>
       {isLoading ? (
-        <h2>Loading...</h2>
+        <Loading>Loading...</Loading>
       ) : (
         <>
           <Wrapper>
