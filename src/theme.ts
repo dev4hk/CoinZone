@@ -12,18 +12,20 @@ export const darkTheme: DefaultTheme = {
   loseColor: "#e84118",
   hoverColor: "#9c88ff",
   inputColor: "#dcdde1",
+  titleColor: "#f5f6fa",
 };
 
 export const lightTheme: DefaultTheme = {
-  bgColor: "whitesmoke",
-  contentBgColor: "#3d3d3d",
+  bgColor: "#f5f6fa",
+  contentBgColor: "#dfe4ea",
   textColor: "black",
-  accentColor: "#dcdde1",
+  accentColor: "#2f3640",
   titleFontSize: "48px",
   subtitleFontSize: "24px",
   fontSize: "18px",
   gainColor: "#4cd137",
   loseColor: "#e84118",
   hoverColor: "#9c88ff",
-  inputColor: "#dcdde1",
+  inputColor: "#ffffff",
+  titleColor: "#f5f6fa",
 };

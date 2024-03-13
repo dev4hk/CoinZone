@@ -25,9 +25,10 @@ const Input = styled.input.attrs({
   type: "number",
 })`
   border-radius: 5px;
-  background-color: ${(props) => props.theme.inputColor};
+  background-color: ${(props) => props.theme.bgColor};
   height: 30px;
   font-size: ${(props) => props.theme.fontSize};
+  color: ${(props) => props.theme.textColor};
   padding-left: 5px;
   &:focus {
     outline: none;
@@ -51,7 +52,7 @@ const Label = styled.label`
   position: absolute;
   right: 0;
   margin-right: 7px;
-  color: ${(props) => props.theme.contentBgColor};
+  color: ${(props) => props.theme.textColor};
   font-size: 13px;
 `;
 const InputGroups = styled.div`

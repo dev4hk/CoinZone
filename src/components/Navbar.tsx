@@ -62,6 +62,9 @@ const Title = styled.div`
   font-size: ${(props) => props.theme.subtitleFontSize};
   display: flex;
   align-items: center;
+  span {
+    color: ${(props) => props.theme.titleColor};
+  }
   &:hover {
     span {
       transition: all 0.2s ease-in;

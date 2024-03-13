@@ -46,6 +46,7 @@ const Loading = styled.div`
   justify-content: center;
   align-items: center;
   font-size: ${(props) => props.theme.subtitleFontSize};
+  color: ${(props) => props.theme.accentColor};
 `;
 
 const Overview = styled.div`

@@ -39,7 +39,7 @@ const CoinsList = styled.ul`
 `;
 
 const Description = styled.div`
-  color: ${(props) => props.theme.accentColor};
+  color: ${(props) => props.theme.titleColor};
 `;
 
 const Detail = styled.div`
@@ -62,6 +62,7 @@ const Loading = styled.div`
   justify-content: center;
   align-items: center;
   font-size: ${(props) => props.theme.subtitleFontSize};
+  color: ${(props) => props.theme.accentColor};
 `;
 
 const Rankings = styled.div`
@@ -85,7 +86,9 @@ const Subtitle = styled.div`
   margin-bottom: 10px;
 `;
 
-const Title = styled.h1``;
+const Title = styled.h1`
+  color: ${(props) => props.theme.titleColor};
+`;
 
 function Coins() {
   const { isLoading: isCoinsLoading, data: coinsData } = useQuery<ICoin[]>(

@@ -1,9 +1,12 @@
+import { useRecoilValue } from "recoil";
 import { IChartProps } from "../interfaces/Interface";
 import ReactApexChart from "react-apexcharts";
+import { isDarkAtom } from "../atom";
 
 const PERIOD_1Y = "1y";
 
 function Chart({ data }: IChartProps) {
+  const isDark = useRecoilValue(isDarkAtom);
   return (
     <div>
       {data.length === 0 ? (
@@ -12,7 +15,7 @@ function Chart({ data }: IChartProps) {
         <ReactApexChart
           type="line"
           options={{
-            theme: { mode: "dark" },
+            theme: { mode: isDark ? "dark" : "light" },
             chart: {
               background: "transparent",
               toolbar: { show: false },
@@ -26,6 +29,9 @@ function Chart({ data }: IChartProps) {
               x: {
                 show: true,
               },
+            },
+            grid: {
+              borderColor: isDark ? "white" : "black",
             },
             xaxis: {
               labels: { show: false },
