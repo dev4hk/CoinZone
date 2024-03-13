@@ -2,11 +2,11 @@ import { Link } from "react-router-dom";
 import styled from "styled-components";
 import { ITicker } from "../interfaces/Interface";
 
-const ChangeNumber = styled.span<{ isgain: string }>`
+const ChangeNumber = styled.span<{ $isGain: boolean }>`
   display: flex;
   align-items: center;
   color: ${(props) =>
-    props.isgain === "true" ? props.theme.gainColor : props.theme.loseColor};
+    props.$isGain ? props.theme.gainColor : props.theme.loseColor};
 `;
 
 const CoinWrapper = styled.div`
@@ -67,11 +67,7 @@ function RankList({ data, title }: RankListProps) {
               />
               {coin.name}
             </CoinWrapper>
-            <ChangeNumber
-              isgain={
-                coin.quotes.USD.percent_change_24h >= 0 ? "true" : "false"
-              }
-            >
+            <ChangeNumber $isGain={coin.quotes.USD.percent_change_24h >= 0}>
               {coin.quotes.USD.percent_change_24h}%
             </ChangeNumber>
           </RankContainer>

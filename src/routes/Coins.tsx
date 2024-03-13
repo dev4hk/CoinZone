@@ -49,8 +49,8 @@ const Detail = styled.div`
   top: 150px;
 `;
 
-const Img = styled.img<{ image: string }>`
-  content: url(${(props) => props.image});
+const Img = styled.img<{ $image: string }>`
+  content: url(${(props) => props.$image});
   width: 100%;
   height: 400px;
   object-fit: cover;
@@ -118,7 +118,7 @@ function Coins() {
       ) : (
         <>
           <Banner>
-            <Img image={HomeImage} />
+            <Img $image={HomeImage} />
             <Detail>
               <Title>Coin Zone</Title>
               <Description>
