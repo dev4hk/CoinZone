@@ -30,6 +30,8 @@ const Input = styled.input.attrs({
   font-size: ${(props) => props.theme.fontSize};
   color: ${(props) => props.theme.textColor};
   padding-left: 5px;
+  text-align: right;
+  padding-right: 35px;
   &:focus {
     outline: none;
   }
