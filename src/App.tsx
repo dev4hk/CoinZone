@@ -1,5 +1,8 @@
-import { createGlobalStyle } from "styled-components";
+import { ThemeProvider, createGlobalStyle } from "styled-components";
 import Router from "./Router";
+import { darkTheme, lightTheme } from "./theme";
+import { useRecoilValue } from "recoil";
+import { isDarkAtom } from "./atom";
 
 const GlobalStyle = createGlobalStyle`
   @import url('https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@300;400&display=swap');
@@ -35,7 +38,6 @@ const GlobalStyle = createGlobalStyle`
   }
   body {
     line-height: 1;
-    
   }
   menu, ol, ul {
     list-style: none;
@@ -68,10 +70,13 @@ const GlobalStyle = createGlobalStyle`
 `;
 
 function App() {
+  const isDark = useRecoilValue(isDarkAtom);
   return (
     <>
-      <GlobalStyle />
-      <Router />
+      <ThemeProvider theme={isDark ? darkTheme : lightTheme}>
+        <GlobalStyle />
+        <Router />
+      </ThemeProvider>
     </>
   );
 }
