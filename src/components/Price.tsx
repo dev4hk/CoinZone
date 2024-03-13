@@ -34,19 +34,19 @@ function Price({ tickerData, isLoading }: PriceProps) {
       ) : (
         <>
           <ChangeWrapper>
-            <ChangeTitle>Rate - 1h</ChangeTitle>
+            <ChangeTitle>Change - 1h</ChangeTitle>
             <ChangeNumber $isNegative={isNegative(priceObj?.percent_change_1h)}>
               {priceObj?.percent_change_1h}%
             </ChangeNumber>
           </ChangeWrapper>
           <ChangeWrapper>
-            <ChangeTitle>Rate - 6h</ChangeTitle>
+            <ChangeTitle>Change - 6h</ChangeTitle>
             <ChangeNumber $isNegative={isNegative(priceObj?.percent_change_6h)}>
               {priceObj?.percent_change_6h}%
             </ChangeNumber>
           </ChangeWrapper>
           <ChangeWrapper>
-            <ChangeTitle>Rate - 12h</ChangeTitle>
+            <ChangeTitle>Change - 12h</ChangeTitle>
             <ChangeNumber
               $isNegative={isNegative(priceObj?.percent_change_12h)}
             >
@@ -54,7 +54,7 @@ function Price({ tickerData, isLoading }: PriceProps) {
             </ChangeNumber>
           </ChangeWrapper>
           <ChangeWrapper>
-            <ChangeTitle>Rate - 24h</ChangeTitle>
+            <ChangeTitle>Change - 24h</ChangeTitle>
             <ChangeNumber
               $isNegative={isNegative(priceObj?.percent_change_24h)}
             >
@@ -62,13 +62,13 @@ function Price({ tickerData, isLoading }: PriceProps) {
             </ChangeNumber>
           </ChangeWrapper>
           <ChangeWrapper>
-            <ChangeTitle>Rate - Week</ChangeTitle>
+            <ChangeTitle>Change - Week</ChangeTitle>
             <ChangeNumber $isNegative={isNegative(priceObj?.percent_change_7d)}>
               {priceObj?.percent_change_7d}%
             </ChangeNumber>
           </ChangeWrapper>
           <ChangeWrapper>
-            <ChangeTitle>Rate - Month</ChangeTitle>
+            <ChangeTitle>Change - Month</ChangeTitle>
             <ChangeNumber
               $isNegative={isNegative(priceObj?.percent_change_30d)}
             >
@@ -76,7 +76,7 @@ function Price({ tickerData, isLoading }: PriceProps) {
             </ChangeNumber>
           </ChangeWrapper>
           <ChangeWrapper>
-            <ChangeTitle>Rate - Year</ChangeTitle>
+            <ChangeTitle>Change - Year</ChangeTitle>
             <ChangeNumber $isNegative={isNegative(priceObj?.percent_change_1y)}>
               {priceObj?.percent_change_1y}%
             </ChangeNumber>
