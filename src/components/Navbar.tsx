@@ -7,8 +7,8 @@ import { isDarkAtom } from "../atom";
 
 const Label = styled.label.attrs({ htmlFor: "checkbox" })`
   position: absolute;
-  top: 0;
-  left: 0;
+  top: 5px;
+  left: 5px;
   width: 42px;
   height: 26px;
   border-radius: 15px;
@@ -82,18 +82,6 @@ const Wrapper = styled.ul`
   position: relative;
 `;
 
-const NavItem = styled.li`
-  margin-left: 20px;
-  cursor: pointer;
-  transition: all 0.2s ease-in;
-  &:hover {
-    color: ${(props) => props.theme.hoverColor};
-  }
-  &:last-child {
-    margin-right: 20px;
-  }
-`;
-
 function Navbar() {
   const setDarkAtom = useSetRecoilState(isDarkAtom);
   const toggleDarkAtom = () => setDarkAtom((prev) => !prev);
@@ -108,10 +96,8 @@ function Navbar() {
         </Link>
       </Wrapper>
       <Wrapper>
-        <div>
-          <CheckBox onClick={toggleDarkAtom} />
-          <Label />
-        </div>
+        <CheckBox onClick={toggleDarkAtom} />
+        <Label />
       </Wrapper>
     </Nav>
   );
