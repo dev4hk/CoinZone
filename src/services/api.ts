@@ -21,7 +21,7 @@ export async function fetchTickerHistory(coinId: string, period: string) {
   const startDate = endDate - 60 * 60 * 24 * 365 + 5;
   const interval = "1d";
   return fetch(
-    `https://api.coinpaprika.com/v1/tickers/${coinId}/historical?start=${startDate}&end=${endDate}&interval=${interval}`
+    `${BASE}/tickers/${coinId}/historical?start=${startDate}&end=${endDate}&interval=${interval}`
   ).then((res) => {
     return res.json();
   });
