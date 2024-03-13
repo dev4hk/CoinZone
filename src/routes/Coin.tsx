@@ -107,26 +107,30 @@ function Coin() {
         <>
           <Wrapper>
             <ContentsBox>
-              <Subtitle>{infoData?.name}</Subtitle>
+              <Subtitle>{infoData?.name || "N/A"}</Subtitle>
               <Overview>
                 <OverviewItem>
                   <OverviewItemDetail>Rank:</OverviewItemDetail>
-                  <OverviewItemDetail>{infoData?.rank}</OverviewItemDetail>
+                  <OverviewItemDetail>
+                    {infoData?.rank || "N/A"}
+                  </OverviewItemDetail>
                 </OverviewItem>
                 <OverviewItem>
                   <OverviewItemDetail>Symbol:</OverviewItemDetail>
-                  <OverviewItemDetail>{infoData?.symbol}</OverviewItemDetail>
+                  <OverviewItemDetail>
+                    {infoData?.symbol || "N/A"}
+                  </OverviewItemDetail>
                 </OverviewItem>
                 <OverviewItem>
                   <OverviewItemDetail>Started At:</OverviewItemDetail>
                   <OverviewItemDetail>
-                    {trimDateTime(infoData?.started_at || "")}
+                    {trimDateTime(infoData?.started_at || "N/A")}
                   </OverviewItemDetail>
                 </OverviewItem>
                 <OverviewItem>
                   <OverviewItemDetail>Price:</OverviewItemDetail>
                   <OverviewItemDetail>
-                    {tickerData?.quotes.USD.price.toFixed(6)}
+                    {tickerData?.quotes.USD.price.toFixed(6) || "N/A"}
                   </OverviewItemDetail>
                 </OverviewItem>
               </Overview>
@@ -137,13 +141,13 @@ function Coin() {
                 <OverviewItem>
                   <OverviewItemDetail>Total Supply:</OverviewItemDetail>
                   <OverviewItemDetail>
-                    {tickerData?.total_supply}
+                    {tickerData?.total_supply || "N/A"}
                   </OverviewItemDetail>
                 </OverviewItem>
                 <OverviewItem>
                   <OverviewItemDetail>Max Supply:</OverviewItemDetail>
                   <OverviewItemDetail>
-                    {tickerData?.max_supply}
+                    {tickerData?.max_supply || "N/A"}
                   </OverviewItemDetail>
                 </OverviewItem>
                 <OverviewItem>
