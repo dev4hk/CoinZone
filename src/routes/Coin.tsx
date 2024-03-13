@@ -2,11 +2,7 @@ import { useParams } from "react-router-dom";
 import styled from "styled-components";
 import Price from "../components/Price";
 import { useQuery } from "react-query";
-import {
-  fetchCoinHistory,
-  fetchCoinInfo,
-  fetchCoinTicker,
-} from "../services/api";
+import { fetchCoin, fetchTicker, fetchTickerHistory } from "../services/api";
 import { ICoinHistory, IInfo, ITicker, Params } from "../interfaces/Interface";
 import Calculator from "../components/Calculator";
 import Chart from "../components/Chart";
@@ -91,15 +87,15 @@ function Coin() {
   const { coinId } = useParams<Params>();
   const { isLoading: isInfoLoading, data: infoData } = useQuery<IInfo>(
     ["info", coinId],
-    () => fetchCoinInfo(coinId)
+    () => fetchCoin(coinId)
   );
   const { isLoading: isTickerLoading, data: tickerData } = useQuery<ITicker>(
     ["ticker", coinId],
-    () => fetchCoinTicker(coinId)
+    () => fetchTicker(coinId)
   );
   const { isLoading: isHistoryLoading, data: historyData } = useQuery<
     ICoinHistory[]
-  >(["ohlcv", coinId], () => fetchCoinHistory(coinId, PERIOD_1Y));
+  >(["ohlcv", coinId], () => fetchTickerHistory(coinId, PERIOD_1Y));
 
   const isLoading = isInfoLoading || isTickerLoading || isHistoryLoading;
 

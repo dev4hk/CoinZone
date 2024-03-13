@@ -8,15 +8,15 @@ export async function fetchTickers() {
   return fetch(`${BASE}/tickers`).then((res) => res.json());
 }
 
-export async function fetchCoinInfo(coinId: string) {
+export async function fetchCoin(coinId: string) {
   return fetch(`${BASE}/coins/${coinId}`).then((res) => res.json());
 }
 
-export async function fetchCoinTicker(coinId: string) {
+export async function fetchTicker(coinId: string) {
   return fetch(`${BASE}/tickers/${coinId}`).then((res) => res.json());
 }
 
-export async function fetchCoinHistory(coinId: string, period: string) {
+export async function fetchTickerHistory(coinId: string, period: string) {
   const endDate = Math.floor(Date.now() / 1000);
   const startDate = endDate - 60 * 60 * 24 * 365 + 5;
   const interval = "1d";

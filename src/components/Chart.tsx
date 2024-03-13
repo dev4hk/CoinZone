@@ -3,8 +3,6 @@ import { IChartProps } from "../interfaces/Interface";
 import ReactApexChart from "react-apexcharts";
 import { isDarkAtom } from "../atom";
 
-const PERIOD_1Y = "1y";
-
 function Chart({ data }: IChartProps) {
   const isDark = useRecoilValue(isDarkAtom);
   return (
