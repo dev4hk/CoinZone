@@ -16,7 +16,11 @@ function Chart({ data }: IChartProps) {
             theme: { mode: isDark ? "dark" : "light" },
             chart: {
               background: "transparent",
-              toolbar: { show: false },
+              toolbar: {
+                tools: {
+                  download: false,
+                },
+              },
             },
             stroke: { curve: "smooth", width: 3 },
             tooltip: {
