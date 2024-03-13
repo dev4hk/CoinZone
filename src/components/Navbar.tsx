@@ -108,8 +108,10 @@ function Navbar() {
         </Link>
       </Wrapper>
       <Wrapper>
-        <CheckBox onClick={toggleDarkAtom} />
-        <Label />
+        <div>
+          <CheckBox onClick={toggleDarkAtom} />
+          <Label />
+        </div>
       </Wrapper>
     </Nav>
   );

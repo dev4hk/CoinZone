@@ -38,8 +38,8 @@ const Input = styled.input.attrs({
     -webkit-appearance: none;
     margin: 0;
   }
-  @media screen and (max-width: 720px) {
-    width: 350px;
+  @media screen and (max-width: 1024px) {
+    max-width: 350px;
     &:first-child {
       margin-bottom: 10px;
     }

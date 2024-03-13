@@ -19,7 +19,7 @@ const Container = styled.div`
   height: 95vh;
   gap: 20px;
 
-  @media screen and (max-width: 720px) {
+  @media screen and (max-width: 1024px) {
     display: flex;
     flex-direction: column;
   }

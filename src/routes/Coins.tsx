@@ -32,7 +32,7 @@ const CoinsList = styled.ul`
   gap: 10px;
   padding: 0;
 
-  @media screen and (max-width: 720px) {
+  @media screen and (max-width: 1024px) {
     display: flex;
     flex-direction: column;
   }
@@ -70,7 +70,7 @@ const Rankings = styled.div`
   grid-template-columns: 1fr 1fr 1fr;
   gap: 10px;
   margin-bottom: 20px;
-  @media screen and (max-width: 720px) {
+  @media screen and (max-width: 1024px) {
     display: flex;
     flex-direction: column;
   }
