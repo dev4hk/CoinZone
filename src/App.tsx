@@ -3,9 +3,9 @@ import Router from "./Router";
 import { darkTheme, lightTheme } from "./theme";
 import { useRecoilValue } from "recoil";
 import { isDarkAtom } from "./atom";
+import { Helmet } from "react-helmet-async";
 
 const GlobalStyle = createGlobalStyle`
-  @import url('https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@300;400&display=swap');
   font-family: 'Source Sans Pro', sans-serif;
   html, body, div, span, applet, object, iframe,
   h1, h2, h3, h4, h5, h6, p, blockquote, pre,
@@ -73,6 +73,12 @@ function App() {
   const isDark = useRecoilValue(isDarkAtom);
   return (
     <>
+      <Helmet>
+        <link
+          rel="stylesheet"
+          href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@300;400&display=swap"
+        />
+      </Helmet>
       <ThemeProvider theme={isDark ? darkTheme : lightTheme}>
         <GlobalStyle />
         <Router />
