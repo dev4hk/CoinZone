@@ -1,46 +1,58 @@
-# Getting Started with Create React App
+# CoinZone
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+This app provides cryptocurrency data with the price detail and its trend in visual graphs.
 
-## Available Scripts
+## Features
 
-In the project directory, you can run:
+- View list of coins
+- View top 10 gainer / loser
+- View coin detail in graph - price change in last 1 year
+- Simple Coin to USD, USD to Coin calculator
+- Light/dark mode toggle
+- Responsive view
 
-### `npm start`
+## Tech Stack
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+**Main:** React, Typescript
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+**Styling:** Styled-Components
 
-### `npm test`
+**State Management:** Recoil
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+**Data fetching & caching:** React-Query
 
-### `npm run build`
+**Data Visualization:** ApexChart
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+**Others:** Font Awesome
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+## Lessons Learned
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+- React Query helps fetch, cache, and poll data so that the browser doesn't need to reload if data doesn't change
 
-### `npm run eject`
+- Recoil helps manage states in a separate memory and enables access-from-anywhere concept so it minimizes number of data passing between components. In this project, it helped change the theme without complexity where each component only needs to look at the Recoil Atom(theme state) and apply proper colors.
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+- ApexChart is a good tool to visualize data with a simple template where user can insert data to, and also it has a built-in animated effect on graph, and is flexible to customizing based on user's needs.
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+## Screenshots
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+![coins1](src/assets/screenshots/coins1.png)
+Main Page #1 -
+Header with button to toggle light theme and dark theme, default is dark theme.
+Displays:
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+- Top 10 coins based on price
+- Top 10 gainers based on growth
+- Top 10 losers based on growth
 
-## Learn More
+![coins2](src/assets/screenshots/coins2.png)
+Main Page #2 -
+Displays list of more coins, user can click on each card to view details
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+![coins3](src/assets/screenshots/coins3.png)
+Main Page #3 -
+Light mode
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+![coin1](src/assets/screenshots/coin1.png)
+Detail Page -
+Displays coin information with graph of 1 year data in 1 day interval
+Built with simple calculator - coin to USD & USD to coin
