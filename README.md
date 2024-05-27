@@ -52,7 +52,7 @@ Displays list of more coins, user can click on each card to view details
 Main Page #3 -
 Light mode
 
-![coin1](src/assets/screenshots/coin1.png)
+![coin](src/assets/screenshots/coin.png)
 Detail Page -
 Displays coin information with graph of 1 year data in 1 day interval
 Built with simple calculator - coin to USD & USD to coin
