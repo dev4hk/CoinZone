@@ -13,17 +13,15 @@ This app provides cryptocurrency data with the price detail and its trend in vis
 
 ## Tech Stack
 
-**Main:** React, Typescript
+![Static Badge](https://img.shields.io/badge/React-blue)
+![Static Badge](https://img.shields.io/badge/Typescript-blue)
+![Static Badge](https://img.shields.io/badge/Recoil-blue)
+![Static Badge](https://img.shields.io/badge/ReactQuery-blue)
+![Static Badge](https://img.shields.io/badge/StyledComponents-blue)
+![Static Badge](https://img.shields.io/badge/HTML-blue)
+![Static Badge](https://img.shields.io/badge/CSS-blue)
+![Static Badge](https://img.shields.io/badge/ApexCharts-blue)
 
-**Styling:** Styled-Components
-
-**State Management:** Recoil
-
-**Data fetching & caching:** React-Query
-
-**Data Visualization:** ApexChart
-
-**Others:** Font Awesome
 
 ## Lessons Learned
 
